@@ -1846,5 +1846,61 @@ document.addEventListener('keydown', function(e) {
   }
 });
 </script>
+
+<style>
+.portfolio-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.portfolio-reveal.visible{opacity:1;transform:translateY(0)}
+.portfolio-reveal[data-delay="100"]{transition-delay:.1s}
+.portfolio-reveal[data-delay="200"]{transition-delay:.2s}
+.portfolio-reveal[data-delay="300"]{transition-delay:.3s}
+.ui-portfolio-notes{max-width:800px;margin:40px auto;padding:28px;background:var(--card-bg,#e6e6e6);border-radius:16px;box-shadow:var(--shadow,0 1px 3px rgba(0,0,0,0.08))}
+.ui-portfolio-notes h2{font-size:1.05rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.ui-portfolio-notes h2 .icon{width:32px;height:32px;border-radius:8px;background:rgba(0,113,227,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.dn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dn-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,0,0,0.06);transition:all .25s}
+.dn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.dn-card h3{font-size:.8rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dn-card h3 .tag{font-size:.56rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.dn-card h3 .tag.theory{background:rgba(0,113,227,0.08);color:#0071e3}
+.dn-card h3 .tag.psychology{background:rgba(124,58,237,0.08);color:#7c3aed}
+.dn-card h3 .tag.metric{background:rgba(16,185,129,0.08);color:#059669}
+.dn-card p{font-size:.74rem;color:var(--text-muted,#6b6b6b);line-height:1.7}
+@media(max-width:768px){.dn-grid{grid-template-columns:1fr}}
+</style>
+
+<section class="ui-portfolio-notes portfolio-reveal" data-delay="200">
+  <h2><span class="icon">📋</span> 设计决策说明（PM视角）</h2>
+  <div class="dn-grid">
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 三栏工作台布局</h3>
+      <p>左侧大纲树、中间编辑器、右侧角色卡——参考 VS Code 和 Scrivener 的布局范式。<strong>信息架构</strong>遵循"导航→内容→辅助"的 F 型阅读流。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag psychology">心理学</span> 4 套主题覆盖创作场景</h3>
+      <p>浅灰（日间写作）、深色（夜间沉浸）、薄荷（护眼长文）、墨水屏（极简专注）。不同主题降低<strong>视觉疲劳</strong>，延长有效创作时间。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag metric">效率</span> 角色管理 + 大纲联动</h3>
+      <p>角色卡片可拖拽排序，大纲节点支持折叠/展开。<strong>Chunking 策略</strong>：将长篇小说拆解为可管理的场景单元，降低认知负荷。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 多格式导出满足分发需求</h3>
+      <p>支持 Markdown / PDF / DOCX / 纯文本导出。不同平台（起点/晋江/微信读书）有不同的格式要求，<strong>一键导出</strong>消除格式转换摩擦。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.portfolio-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+    });
+  },{threshold:0.1});
+  els.forEach(function(el){obs.observe(el)});
+})();
+</script>
 </body>
 </html>

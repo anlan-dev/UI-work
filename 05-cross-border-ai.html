@@ -3492,5 +3492,61 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./demo-sw.js').catch(function() {});
 }
 </script>
+
+<style>
+.portfolio-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.portfolio-reveal.visible{opacity:1;transform:translateY(0)}
+.portfolio-reveal[data-delay="100"]{transition-delay:.1s}
+.portfolio-reveal[data-delay="200"]{transition-delay:.2s}
+.portfolio-reveal[data-delay="300"]{transition-delay:.3s}
+.ui-portfolio-notes{max-width:800px;margin:40px auto;padding:28px;background:var(--card,#e6e6e6);border-radius:16px;box-shadow:0 4px 12px rgba(37,99,235,0.08)}
+.ui-portfolio-notes h2{font-size:1.05rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.ui-portfolio-notes h2 .icon{width:32px;height:32px;border-radius:8px;background:rgba(37,99,235,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.dn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dn-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,0,0,0.06);transition:all .25s}
+.dn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.dn-card h3{font-size:.8rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dn-card h3 .tag{font-size:.56rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.dn-card h3 .tag.theory{background:rgba(37,99,235,0.08);color:#2563eb}
+.dn-card h3 .tag.psychology{background:rgba(124,58,237,0.08);color:#7c3aed}
+.dn-card h3 .tag.metric{background:rgba(16,185,129,0.08);color:#059669}
+.dn-card p{font-size:.74rem;color:var(--muted,#6b7280);line-height:1.7}
+@media(max-width:768px){.dn-grid{grid-template-columns:1fr}}
+</style>
+
+<section class="ui-portfolio-notes portfolio-reveal" data-delay="200">
+  <h2><span class="icon">📋</span> 设计决策说明（PM视角）</h2>
+  <div class="dn-grid">
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 移动端 APP Shell 架构</h3>
+      <p>430px 固定宽度模拟真实手机屏幕。底部 Tab Bar 4 个入口（首页/分类/拼团/我的）符合移动端导航心智模型。<strong>毛玻璃顶栏</strong>保持层次感。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag psychology">心理学</span> 三语 i18n 降低认知门槛</h3>
+      <p>中/英/日三语实时切换，<code>localStorage</code> 持久化语言偏好。跨境电商的核心痛点是<strong>语言障碍</strong>——用母语购物转化率提升 2-3 倍。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag metric">转化</span> 拼团倒计时 + 社交证明</h3>
+      <p>"还差2人成团"+"倒计时"双重紧迫感。参考拼多多的<strong>社交裂变模型</strong>——拼团价 vs 单独购买价的对比制造"不拼就亏了"的心理。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 双币价格 + 实时汇率</h3>
+      <p>商品同时显示人民币和目标货币价格，消除汇率心算负担。<strong>Progressive Disclosure</strong>：默认显示主价格，点击展开详细汇率信息。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.portfolio-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+    });
+  },{threshold:0.1});
+  els.forEach(function(el){obs.observe(el)});
+})();
+</script>
 </body>
 </html>

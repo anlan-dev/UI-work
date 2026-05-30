@@ -3842,5 +3842,63 @@
         });
     })();
 </script>
+
+<style>
+/* === Portfolio Enhancement: Entry Animations + Design Notes === */
+.portfolio-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.portfolio-reveal.visible{opacity:1;transform:translateY(0)}
+.portfolio-reveal[data-delay="100"]{transition-delay:.1s}
+.portfolio-reveal[data-delay="200"]{transition-delay:.2s}
+.portfolio-reveal[data-delay="300"]{transition-delay:.3s}
+
+.ui-portfolio-notes{max-width:800px;margin:40px auto;padding:28px;background:var(--card-bg,#e6e6e6);border-radius:16px;box-shadow:var(--shadow,0 1px 3px rgba(0,0,0,0.08))}
+.ui-portfolio-notes h2{font-size:1.05rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.ui-portfolio-notes h2 .icon{width:32px;height:32px;border-radius:8px;background:rgba(0,113,227,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.dn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dn-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,0,0,0.06);transition:all .25s}
+.dn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.dn-card h3{font-size:.8rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dn-card h3 .tag{font-size:.56rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.dn-card h3 .tag.theory{background:rgba(0,113,227,0.08);color:#0071e3}
+.dn-card h3 .tag.psychology{background:rgba(124,58,237,0.08);color:#7c3aed}
+.dn-card h3 .tag.metric{background:rgba(16,185,129,0.08);color:#059669}
+.dn-card p{font-size:.74rem;color:var(--muted,#6b7280);line-height:1.7}
+@media(max-width:768px){.dn-grid{grid-template-columns:1fr}}
+</style>
+
+<section class="ui-portfolio-notes portfolio-reveal" data-delay="200">
+  <h2><span class="icon">📋</span> 设计决策说明（PM视角）</h2>
+  <div class="dn-grid">
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 新拟物风格选择</h3>
+      <p>宠物健康管理是情感化场景，新拟物的柔和凹凸感传递"温暖/呵护"。双向阴影 <code>8px 8px 16px rgba(0,0,0,0.1), -8px -8px 16px rgba(255,255,255,0.7)</code> 模拟物理按钮触感。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag psychology">心理学</span> 情感化设计 + 损失厌恶</h3>
+      <p>宠物头像+昵称建立情感连接。"距上次驱虫已超30天"用<strong>损失厌恶</strong>驱动行动——不是"你应该驱虫"，而是"你已经拖延了"。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag metric">功能</span> OCR + Excel 降低使用门槛</h3>
+      <p>OCR 识别疫苗本照片，自动提取日期/疫苗名称。<strong>降低录入摩擦 = 提升记录频率</strong>。Excel 导出满足"带去宠物医院"的线下场景。</p>
+    </div>
+    <div class="dn-card">
+      <h3><span class="tag theory">设计</span> 多主题适配使用场景</h3>
+      <p>3 套主题（浅灰/深色/高级灰）覆盖不同使用环境。深色模式适合夜间查看——宠物主人常在睡前检查明日疫苗预约。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.portfolio-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+    });
+  },{threshold:0.1});
+  els.forEach(function(el){obs.observe(el)});
+})();
+</script>
 </body>
 </html>
