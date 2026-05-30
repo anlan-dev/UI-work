@@ -126,7 +126,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
   .process-steps::before{display:none}
   .hero-stats{gap:24px}
   .nav-links{display:none}
+  .ref-grid{grid-template-columns:1fr 1fr}
+  .ref-category-grid{grid-template-columns:1fr}
 }
+@media(max-width:480px){
+  .ref-grid{grid-template-columns:1fr}
+}
+
+/* ===== INSPIRATION / DESIGN REFERENCES ===== */
+.ref-header{text-align:center;max-width:600px;margin:0 auto 48px}
+.ref-header p{font-size:1rem;color:var(--text2);line-height:1.8}
+.ref-categories{display:flex;flex-direction:column;gap:40px}
+.ref-category{}
+.ref-cat-title{font-size:.78rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.ref-cat-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.ref-category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ref-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;transition:all .3s;text-decoration:none;display:flex;flex-direction:column}
+.ref-card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.3);background:var(--card-hover)}
+.ref-card-icon{font-size:1.6rem;margin-bottom:12px}
+.ref-card-name{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:4px;transition:color .2s}
+.ref-card:hover .ref-card-name{color:var(--accent)}
+.ref-card-desc{font-size:.78rem;color:var(--text2);line-height:1.6;margin-bottom:10px;flex:1}
+.ref-card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ref-card-tag{font-size:.62rem;padding:3px 10px;border-radius:999px;font-weight:500;letter-spacing:.03em}
+.ref-card-tag.blue{background:rgba(96,165,250,0.1);color:var(--accent2)}
+.ref-card-tag.purple{background:rgba(167,139,250,0.1);color:var(--accent)}
+.ref-card-tag.green{background:rgba(52,211,153,0.1);color:var(--accent3)}
+.ref-card-tag.orange{background:rgba(249,115,22,0.1);color:#f97316}
+.ref-card-tag.pink{background:rgba(244,114,182,0.1);color:#f472b6}
+
+.ref-personal{text-align:center;padding:48px 0 0}
+.ref-personal p{font-size:.85rem;color:var(--text2);line-height:1.8}
+.ref-personal .highlight{color:var(--accent);font-weight:600}
 </style>
 </head>
 <body>
@@ -138,6 +169,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
     <a href="#projects">作品</a>
     <a href="#principles">理念</a>
     <a href="#process">流程</a>
+    <a href="#inspiration">灵感</a>
   </div>
 </div>
 </nav>
@@ -319,6 +351,148 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
       <div class="process-step"><div class="ps-num">02</div><div class="ps-title">定义</div><div class="ps-desc">用户画像<br>需求优先级<br>成功指标</div></div>
       <div class="process-step"><div class="ps-num">03</div><div class="ps-title">设计</div><div class="ps-desc">信息架构<br>交互原型<br>视觉系统</div></div>
       <div class="process-step"><div class="ps-num">04</div><div class="ps-title">验证</div><div class="ps-desc">可用性测试<br>A/B实验<br>数据迭代</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="inspiration">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Design Inspiration</div>
+      <h2 class="section-title">灵感来源</h2>
+      <div class="ref-header">
+        <p class="section-desc" style="margin:0 auto">好的设计不是凭空想象出来的。以下是我日常汲取灵感的优质平台，分类整理供你参考。</p>
+      </div>
+    </div>
+
+    <div class="ref-categories reveal">
+      <div class="ref-category">
+        <div class="ref-cat-title">🎨 设计灵感平台</div>
+        <div class="ref-category-grid">
+          <a class="ref-card" href="https://dribbble.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🏀</span>
+            <div class="ref-card-name">Dribbble</div>
+            <div class="ref-card-desc">全球最大的设计师社区，百万级 UI 作品。格式「Shots」短平快，适合日常快速刷灵感。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag pink">Shots</span><span class="ref-card-tag orange">社区</span><span class="ref-card-tag blue">趋势</span></div>
+          </a>
+          <a class="ref-card" href="https://www.behance.net/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🎯</span>
+            <div class="ref-card-name">Behance</div>
+            <div class="ref-card-desc">Adobe 旗下创意平台，作品以完整 Case Study 为主，适合深挖设计思考过程。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag purple">Case Study</span><span class="ref-card-tag blue">完整项目</span></div>
+          </a>
+          <a class="ref-card" href="https://www.awwwards.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🏆</span>
+            <div class="ref-card-name">Awwwards</div>
+            <div class="ref-card-desc">全球顶尖网站评选平台，评审维度覆盖设计、可用性、创意和内容四大维度。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag green">评选</span><span class="ref-card-tag purple">标杆</span><span class="ref-card-tag orange">趋势</span></div>
+          </a>
+          <a class="ref-card" href="https://thefwa.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">✨</span>
+            <div class="ref-card-name">The FWA</div>
+            <div class="ref-card-desc">专注实验性和创新性网页设计，WebGL、3D 交互、沉浸式体验的先锋阵地。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag pink">WebGL</span><span class="ref-card-tag blue">3D</span><span class="ref-card-tag purple">实验</span></div>
+          </a>
+          <a class="ref-card" href="https://godly.website/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🌟</span>
+            <div class="ref-card-name">Godly</div>
+            <div class="ref-card-desc">精选现代网页设计画廊，注重动效、布局和实验性。界面干净直接，布灵感优选。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag orange">画廊</span><span class="ref-card-tag green">精选</span><span class="ref-card-tag blue">动效</span></div>
+          </a>
+          <a class="ref-card" href="https://www.cssdesignawards.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🌐</span>
+            <div class="ref-card-name">CSS Design Awards</div>
+            <div class="ref-card-desc">全球 CSS 设计评奖平台，侧重 UI/UX 工艺和前端实现，适合开发视角的设计参考。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag blue">CSS</span><span class="ref-card-tag purple">前端</span><span class="ref-card-tag orange">工艺</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="ref-category">
+        <div class="ref-cat-title">📱 产品设计案例库</div>
+        <div class="ref-category-grid">
+          <a class="ref-card" href="https://mobbin.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">📱</span>
+            <div class="ref-card-name">Mobbin</div>
+            <div class="ref-card-desc">海量真实 APP 截图库，可按应用、流程、组件搜索。做竞品分析时的首选工具。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag blue">APP截图</span><span class="ref-card-tag purple">竞品分析</span><span class="ref-card-tag orange">海量</span></div>
+          </a>
+          <a class="ref-card" href="https://screenlane.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">📲</span>
+            <div class="ref-card-name">Screenlane</div>
+            <div class="ref-card-desc">专注移动端 UI 截图，按组件类型（表单/导航/列表）分类，适合找特定模式参考。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag green">移动端</span><span class="ref-card-tag purple">组件</span><span class="ref-card-tag blue">模式</span></div>
+          </a>
+          <a class="ref-card" href="https://uisources.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🔍</span>
+            <div class="ref-card-name">UI Sources</div>
+            <div class="ref-card-desc">专注交互模式库，按用户流程（注册/搜索/结账）组织，适合做 UX Flow 参考。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag pink">交互模式</span><span class="ref-card-tag blue">流程</span></div>
+          </a>
+          <a class="ref-card" href="https://collectui.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">📂</span>
+            <div class="ref-card-name">Collect UI</div>
+            <div class="ref-card-desc">Dribbble 优质作品聚合器，按颜色、组件、行业分类，节省在 Dribbble 中搜索的时间。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag orange">聚合</span><span class="ref-card-tag purple">分类</span><span class="ref-card-tag green">效率</span></div>
+          </a>
+          <a class="ref-card" href="https://saaspages.design/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🏢</span>
+            <div class="ref-card-name">SaaS Pages</div>
+            <div class="ref-card-desc">专注 SaaS 定价页和落地页设计，适合做 B2B 产品的 Landing Page 参考。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag blue">SaaS</span><span class="ref-card-tag purple">定价页</span><span class="ref-card-tag orange">Landing</span></div>
+          </a>
+          <a class="ref-card" href="https://land-book.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">🌍</span>
+            <div class="ref-card-name">Land Book</div>
+            <div class="ref-card-desc">精选落地页和图库网站集合，按颜色、风格、类型筛选，适合找网页设计灵感。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag green">落地页</span><span class="ref-card-tag blue">筛选</span><span class="ref-card-tag pink">网页</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="ref-category">
+        <div class="ref-cat-title">🏛️ 品牌官网标杆</div>
+        <div class="ref-category-grid">
+          <a class="ref-card" href="https://variant.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">◆</span>
+            <div class="ref-card-name">Variant</div>
+            <div class="ref-card-desc">设计工具领域的标杆网站。无限滚动展示设计方案，像和创意总监一起工作。设计极简但有冲击力。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag purple">极简</span><span class="ref-card-tag blue">创意</span><span class="ref-card-tag orange">启动页</span></div>
+          </a>
+          <a class="ref-card" href="https://linear.app/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">◈</span>
+            <div class="ref-card-name">Linear</div>
+            <div class="ref-card-desc">现代 SaaS 品牌设计的标杆。极简主义、系统化排版、流畅动效——每个像素都是克制的。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag blue">SaaS</span><span class="ref-card-tag purple">极简</span><span class="ref-card-tag green">品牌</span></div>
+          </a>
+          <a class="ref-card" href="https://stripe.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">◉</span>
+            <div class="ref-card-name">Stripe</div>
+            <div class="ref-card-desc">B2B 品牌设计的巅峰。信息层级清晰、大量留白、渐变色运用自然又不张扬。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag pink">B2B</span><span class="ref-card-tag blue">排版</span><span class="ref-card-tag purple">留白</span></div>
+          </a>
+          <a class="ref-card" href="https://www.apple.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon"></span>
+            <div class="ref-card-name">Apple</div>
+            <div class="ref-card-desc">HIG（人机界面指南）的实践来源。大图+文案的内容节奏是产品页设计的标准范式。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag purple">HIG</span><span class="ref-card-tag orange">内容节奏</span><span class="ref-card-tag blue">产品页</span></div>
+          </a>
+          <a class="ref-card" href="https://vercel.com/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">▲</span>
+            <div class="ref-card-name">Vercel</div>
+            <div class="ref-card-desc">开发者工具品牌化的优秀案例。深色主题+几何元素+极简排版，重视动效细节。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag green">深色主题</span><span class="ref-card-tag blue">开发者</span><span class="ref-card-tag purple">动效</span></div>
+          </a>
+          <a class="ref-card" href="https://www.notion.so/" target="_blank" rel="noopener">
+            <span class="ref-card-icon">📄</span>
+            <div class="ref-card-name">Notion</div>
+            <div class="ref-card-desc">内容型产品设计的参照。大字重对比+大量留白+插画系统的搭配方式，平衡趣味与专业。</div>
+            <div class="ref-card-tags"><span class="ref-card-tag orange">内容</span><span class="ref-card-tag pink">插画</span><span class="ref-card-tag green">排版</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-personal reveal">
+      <p>💡 收藏你喜欢的网站，建立自己的设计灵感库。<br>好的设计不是模仿，是在大量输入后<strong>形成自己的判断力</strong>。<br><span class="highlight">每个像素都有它的道理</span> —— 但在那之前，先看够一百万个像素。</p>
     </div>
   </section>
 
