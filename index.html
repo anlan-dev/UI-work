@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI 设计作品集 · 王天娇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0b;--card:#141416;--text:#f5f5f7;--text2:#a1a1aa;--accent:#7c3aed;--accent2:#06b6d4;--border:#27272a;--shadow:0 8px 40px rgba(0,0,0,0.5)}
+body{background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;line-height:1.6;min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:60px 24px}
+
+.hero{text-align:center;margin-bottom:60px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.15;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1rem;color:var(--text2);max-width:560px;margin:0 auto;line-height:1.7}
+.hero-meta{display:flex;justify-content:center;gap:24px;margin-top:24px;font-size:.85rem;color:var(--text2)}
+.hero-meta span{display:flex;align-items:center;gap:6px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.card:hover{transform:translateY(-8px);border-color:var(--accent);box-shadow:0 16px 64px rgba(124,58,237,0.2)}
+.card-preview{height:200px;position:relative;overflow:hidden}
+.card-preview iframe{width:200%;height:200%;transform:scale(0.5);transform-origin:top left;border:none;pointer-events:none}
+.card-body{padding:24px}
+.card-tag{display:inline-block;padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:600;margin-bottom:12px}
+.card-tag.finance{background:#6366f1;color:#fff}
+.card-tag.health{background:#e07a5f;color:#fff}
+.card-tag.saas{background:#7c3aed;color:#fff}
+.card-title{font-size:1.2rem;font-weight:800;margin-bottom:8px}
+.card-desc{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.card-tags span{font-size:.7rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,0.06);color:var(--text2)}
+
+.section-title{font-size:1.5rem;font-weight:800;margin:48px 0 8px}
+.section-desc{font-size:.9rem;color:var(--text2);margin-bottom:32px}
+
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:48px}
+.principle{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.principle-icon{font-size:2rem;margin-bottom:12px}
+.principle h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.principle p{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+.footer{text-align:center;padding:40px 0;color:var(--text3);font-size:.8rem}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>UI 设计作品集<br><em>产品经理视角</em></h1>
+    <p>每个作品不仅展示界面，更说清「为什么这样设计」。从用户心理到商业转化，用产品经理思维驱动每一个像素。</p>
+    <div class="hero-meta">
+      <span>📐 3 个作品</span>
+      <span>🧠 15+ 设计决策</span>
+      <span>📊 数据驱动</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">作品展示</h2>
+  <p class="section-desc">点击卡片查看完整作品，每个作品底部附详细的设计决策说明。</p>
+
+  <div class="grid">
+    <a class="card" href="01-finance-dashboard.html">
+      <div class="card-preview"><iframe src="01-finance-dashboard.html" loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag finance">数据仪表盘</span>
+        <div class="card-title">MoneyFlow · 个人财务仪表盘</div>
+        <div class="card-desc">面向都市白领的记账APP首页，用Z型阅读流和Progressive Disclosure策略，让用户3秒内获得财务全貌。</div>
+        <div class="card-tags"><span>环形图</span><span>趋势折线</span><span>FAB记账</span><span>6色分类</span></div>
+      </div>
+    </a>
+    <a class="card" href="02-health-tracker.html">
+      <div class="card-preview"><iframe src="02-health-tracker.html" loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag health">移动端APP</span>
+        <div class="card-title">HabitFlow · 每日健康打卡</div>
+        <div class="card-desc">用BJ Fogg行为模型和损失厌恶心理学，解决打卡APP 7日留存<20%的问题。暖色调+即时反馈动画。</div>
+        <div class="card-tags"><span>进度环</span><span>打卡动画</span><span>热力图</span><span>Tab导航</span></div>
+      </div>
+    </a>
+    <a class="card" href="03-saas-pricing.html">
+      <div class="card-preview"><iframe src="03-saas-pricing.html" loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag saas">B2B定价页</span>
+        <div class="card-title">CloudSync · SaaS 定价页</div>
+        <div class="card-desc">用锚定效应和Von Restorff效应优化三栏定价布局，年付默认选中+功能对比表+社会证明全链路转化设计。</div>
+        <div class="card-tags"><span>锚定效应</span><span>年付切换</span><span>对比表</span><span>FAQ</span></div>
+      </div>
+    </a>
+  </div>
+
+  <h2 class="section-title">设计原则</h2>
+  <p class="section-desc">贯穿所有作品的核心设计理念。</p>
+  <div class="principles">
+    <div class="principle"><div class="principle-icon">🎯</div><h3>用户优先</h3><p>每个设计决策都从"用户需要什么"出发，而非"技术能做什么"。</p></div>
+    <div class="principle"><div class="principle-icon">📊</div><h3>数据驱动</h3><p>用A/B测试和行为数据验证设计假设，不依赖主观审美。</p></div>
+    <div class="principle"><div class="principle-icon">🧠</div><h3>心理学应用</h3><p>锚定效应、损失厌恶、Fitts's Law——每个交互都有理论支撑。</p></div>
+    <div class="principle"><div class="principle-icon">⚡</div><h3>效率优先</h3><p>减少认知负荷和操作步骤，让用户用最少的思考完成任务。</p></div>
+  </div>
+
+  <div class="footer">
+    <p>王天娇 · 产品经理 · UI 设计作品集</p>
+    <p style="margin-top:8px">每个像素都有它的道理</p>
+  </div>
+
+</div>
+
+</body>
+</html>

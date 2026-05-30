@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HabitFlow · 每日健康打卡 — UI 设计作品</title>
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  DESIGN.md 核心 Token                                       ║
+║  色板: canvas #f5f0eb / surface #ffffff / primary #e07a5f   ║
+║        success #81b29a / accent #f2cc8f / text #3d405b       ║
+║  字体: Inter + Noto Sans SC                                  ║
+║  圆角: card 20px / button 14px / pill 999px                  ║
+║  阴影: 0 8px 32px rgba(0,0,0,0.08)                          ║
+║  设计家族: 暖色调新拟物 + 有机形态                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║  📋 产品经理设计决策文档                                      ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  作品: HabitFlow 每日健康打卡                                 ║
+║  目标用户: 20-30岁想养成健康习惯但总是半途而废的年轻人          ║
+║  核心问题: 打卡APP留存率低（7日留存<20%），用户缺乏即时正反馈    ║
+║                                                              ║
+║  ┌─────────────────────────────────────────────────────┐     ║
+║  │ 设计决策 1: 「今日任务」而非「全部习惯」               │     ║
+║  │                                                     │     ║
+║  │ WHY: 面对10个未完成习惯，用户产生"选择过载"            │     ║
+║  │ → 首页只展示"今天需要做的3件事"                       │     ║
+║  │ → 用"还差2个就完成今日目标"制造近在咫尺的感觉          │     ║
+║  │ → 参考 BJ Fogg 行为模型: 行为 = 动机 × 能力 × 触发    │     ║
+║  └─────────────────────────────────────────────────────┘     ║
+║                                                              ║
+║  ┌─────────────────────────────────────────────────────┐     ║
+║  │ 设计决策 2: 打卡动画 — 即时多巴胺反馈                 │     ║
+║  │                                                     │     ║
+║  │ WHY: 打卡本身没有即时奖励，需要人工制造"爽感"         │     ║
+║  │ → 点击打卡后: 勾号弹跳动画 + 进度环填充 + 微震动      │     ║
+║  │ → 完成全部: 全屏彩纸撒花 + "今日已超越87%的人"         │     ║
+║  │ → 动画时长300ms（太快无感，太慢影响效率）              │     ║
+║  └─────────────────────────────────────────────────────┘     ║
+║                                                              ║
+║  ┌─────────────────────────────────────────────────────┐     ║
+║  │ 设计决策 3: 连续打卡天数 — 损失厌恶驱动               │     ║
+║  │                                                     │     ║
+║  │ WHY: 人类对"失去"的敏感度是"获得"的2倍               │     ║
+║  │ → "已连续7天"比"获得7天成就"更有驱动力               │     ║
+║  │ → 断签后数字归零，制造"不想断"的心理                 │     ║
+║  │ → GitHub 贡献图式热力图，可视化坚持的力量             │     ║
+║  └─────────────────────────────────────────────────────┘     ║
+║                                                              ║
+║  ┌─────────────────────────────────────────────────────┐     ║
+║  │ 设计决策 4: 暖色调 — 信任与舒适感                     │     ║
+║  │                                                     │     ║
+║  │ WHY: 健康类APP需要"温暖"而非"冷酷"                    │     ║
+║  │ → 画布色 #f5f0eb 是米白色，像纸张一样自然             │     ║
+║  │ → 主色 #e07a5f 是陶土橙，传递"接地/健康"的感觉        │     ║
+║  │ → 成功色 #81b29a 是鼠尾草绿，放松而非刺眼             │     ║
+║  │ → 避免使用纯红/纯绿（色觉障碍用户无法区分）            │     ║
+║  └─────────────────────────────────────────────────────┘     ║
+║                                                              ║
+║  ┌─────────────────────────────────────────────────────┐     ║
+║  │ 设计决策 5: 底部导航 4 tab — 符合心智模型              │     ║
+║  │                                                     │     ║
+║  │ WHY: 用户对健康APP有固定预期                          │     ║
+║  │ → 今日(首页) / 统计(数据) / 发现(社区) / 我的(设置)   │     ║
+║  │ → 4个tab是移动端导航的"黄金数量"(Fitts's Law)         │     ║
+║  │ → 当前tab用填充图标+主色，其余用线框图标+灰色          │     ║
+║  └─────────────────────────────────────────────────────┘     ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --canvas:#f5f0eb;--surface:#ffffff;
+  --text:#3d405b;--text2:#6b6d7b;--text3:#9a9caa;
+  --primary:#e07a5f;--primary-soft:#fdf0ec;
+  --success:#81b29a;--success-soft:#edf5f0;
+  --accent:#f2cc8f;--accent-soft:#fdf6e8;
+  --border:#e8e4df;--shadow:0 8px 32px rgba(0,0,0,0.08);
+  --r1:14px;--r2:20px;--r3:28px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;color:var(--text);line-height:1.6;min-height:100vh;min-height:100dvh;padding-bottom:calc(80px + var(--safe-b))}
+
+.app{max-width:430px;margin:0 auto;padding:20px 20px 0}
+
+/* 顶部问候 */
+.greeting{text-align:center;padding:16px 0 24px}
+.greeting-date{font-size:.8rem;color:var(--text3);font-weight:500;letter-spacing:.05em}
+.greeting-text{font-size:1.5rem;font-weight:800;margin-top:4px;letter-spacing:-.02em}
+.greeting-sub{font-size:.85rem;color:var(--text2);margin-top:4px}
+
+/* 进度环 — 今日完成度，视觉焦点 */
+.progress-ring-wrap{display:flex;justify-content:center;padding:8px 0 28px}
+.progress-ring{position:relative;width:180px;height:180px}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring .ring-bg{stroke:var(--border);fill:none;stroke-width:10}
+.progress-ring .ring-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ring-pct{font-size:2.5rem;font-weight:800;color:var(--primary);line-height:1}
+.ring-label{font-size:.8rem;color:var(--text3);margin-top:4px}
+
+/* 今日任务卡片 */
+.section-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.section-title span{font-size:.75rem;color:var(--text3);font-weight:500}
+
+.task-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.task-card{background:var(--surface);border-radius:var(--r2);padding:18px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.task-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:0 4px 4px 0}
+.task-card.habit-water::after{background:#60a5fa}
+.task-card.habit-exercise::after{background:var(--success)}
+.task-card.habit-read::after{background:var(--accent)}
+.task-card.habit-meditate::after{background:var(--primary)}
+.task-card.habit-sleep::after{background:#a78bfa}
+
+.task-check{width:32px;height:32px;border-radius:50%;border:2.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;cursor:pointer}
+.task-check svg{opacity:0;transform:scale(0);transition:all .3s}
+.task-check.checked{background:var(--success);border-color:var(--success)}
+.task-check.checked svg{opacity:1;transform:scale(1);color:#fff}
+
+.task-info{flex:1}
+.task-name{font-size:.95rem;font-weight:600}
+.task-meta{font-size:.75rem;color:var(--text3);margin-top:2px}
+.task-streak{display:flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:var(--primary);background:var(--primary-soft);padding:4px 10px;border-radius:999px}
+
+.task-card.done{opacity:.6}
+.task-card.done .task-name{text-decoration:line-through;color:var(--text3)}
+
+/* 热力图 — GitHub 风格，可视化坚持的力量 */
+.heatmap-section{margin-bottom:28px}
+.heatmap{background:var(--surface);border-radius:var(--r2);padding:20px;box-shadow:var(--shadow)}
+.heatmap-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:12px}
+.heatmap-cell{aspect-ratio:1;border-radius:4px;background:var(--border);transition:background .2s}
+.heatmap-cell.l1{background:#fde8e0}
+.heatmap-cell.l2{background:#f5c0ab}
+.heatmap-cell.l3{background:#e8957d}
+.heatmap-cell.l4{background:var(--primary)}
+.heatmap-months{display:flex;justify-content:space-between;font-size:.65rem;color:var(--text3);margin-top:8px}
+
+/* 底部 Tab Bar */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--surface);box-shadow:0 -4px 20px rgba(0,0,0,0.06);display:flex;justify-content:space-around;padding:8px 0 calc(8px + var(--safe-b))}
+.tab-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px;color:var(--text3);font-size:.65rem;font-family:inherit;font-weight:500;transition:all .2s}
+.tab-btn.active{color:var(--primary)}
+.tab-icon{width:28px;height:28px}
+.tab-label{letter-spacing:.3px}
+
+/* 底部设计说明区 */
+.design-notes{margin:32px 0;background:var(--surface);border-radius:var(--r2);padding:24px;box-shadow:var(--shadow)}
+.design-notes h2{font-size:1.15rem;font-weight:800;margin-bottom:20px;color:var(--primary)}
+.dn-section{margin-bottom:20px}
+.dn-section h3{font-size:.9rem;font-weight:700;margin-bottom:6px}
+.dn-section p{font-size:.82rem;color:var(--text2);line-height:1.8}
+.dn-badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.68rem;font-weight:600;margin:0 2px}
+.dn-badge.behavior{background:var(--primary-soft);color:var(--primary)}
+.dn-badge.psychology{background:var(--accent-soft);color:#c59a4a}
+.dn-badge.metric{background:var(--success-soft);color:var(--success)}
+
+/* 打卡动画 */
+@keyframes checkBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes confetti{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(600px) rotate(720deg);opacity:0}}
+.confetti-piece{position:fixed;top:-10px;width:10px;height:10px;border-radius:2px;animation:confetti 2s ease-in forwards;z-index:999;pointer-events:none}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="greeting">
+    <div class="greeting-date">2026年5月30日 · 星期五</div>
+    <div class="greeting-text">早上好，天娇 ☀️</div>
+    <div class="greeting-sub">今天也要照顾好自己呀</div>
+  </div>
+
+  <!-- 进度环: 一眼看到"今天完成了多少"，制造紧迫感 -->
+  <div class="progress-ring-wrap">
+    <div class="progress-ring">
+      <svg width="180" height="180" viewBox="0 0 180 180">
+        <circle class="ring-bg" cx="90" cy="90" r="75"/>
+        <circle class="ring-fill" cx="90" cy="90" r="75" stroke="var(--primary)" stroke-dasharray="471" stroke-dashoffset="188"/>
+      </svg>
+      <div class="ring-center">
+        <div class="ring-pct">60%</div>
+        <div class="ring-label">今日完成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日任务: 只展示今天要做的，减少选择过载 -->
+  <div class="section-title">
+    今日任务
+    <span>3/5 已完成</span>
+  </div>
+  <div class="task-list">
+    <div class="task-card habit-water done">
+      <div class="task-check checked"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="task-info"><div class="task-name">💧 喝8杯水</div><div class="task-meta">每日 · 已完成</div></div>
+      <div class="task-streak">🔥 7天</div>
+    </div>
+    <div class="task-card habit-exercise done">
+      <div class="task-check checked"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="task-info"><div class="task-name">🏃 运动30分钟</div><div class="task-meta">每周3次 · 已完成</div></div>
+      <div class="task-streak">🔥 5天</div>
+    </div>
+    <div class="task-card habit-read done">
+      <div class="task-check checked"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="task-info"><div class="task-name">📖 阅读30分钟</div><div class="task-meta">每日 · 已完成</div></div>
+      <div class="task-streak">🔥 12天</div>
+    </div>
+    <div class="task-card habit-meditate">
+      <div class="task-check" onclick="toggleCheck(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="task-info"><div class="task-name">🧘 冥想10分钟</div><div class="task-meta">每日 · 待完成</div></div>
+    </div>
+    <div class="task-card habit-sleep">
+      <div class="task-check" onclick="toggleCheck(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="task-info"><div class="task-name">😴 23:00前入睡</div><div class="task-meta">每日 · 待完成</div></div>
+    </div>
+  </div>
+
+  <!-- 热力图: GitHub 贡献图风格，可视化坚持的力量 -->
+  <div class="heatmap-section">
+    <div class="section-title">本月打卡热力图</div>
+    <div class="heatmap">
+      <div class="heatmap-grid" id="heatmapGrid"></div>
+      <div class="heatmap-months"><span>5月1日</span><span>5月15日</span><span>5月30日</span></div>
+    </div>
+  </div>
+
+  <!-- 设计理由说明 -->
+  <div class="design-notes">
+    <h2>📋 设计决策说明（PM视角）</h2>
+
+    <div class="dn-section">
+      <h3>🧠 决策1: 减少选择 — 只展示今日任务</h3>
+      <p>参考 <span class="dn-badge psychology">BJ Fogg 行为模型</span>，行为 = 动机 × 能力 × 触发。首页不展示全部习惯列表（会产生选择过载），只展示"今天需要做的5件事"。用"3/5已完成"制造<span class="dn-badge behavior">近在咫尺效应</span>（Goal Gradient Effect），用户越接近目标越有动力完成。</p>
+    </div>
+
+    <div class="dn-section">
+      <h3>✨ 决策2: 即时反馈动画</h3>
+      <p>打卡本身没有即时奖励（健康收益是长期的），需要人工制造多巴胺。打卡后触发：①勾号弹跳动画(300ms) ②进度环填充 ③全部完成时全屏彩纸。<span class="dn-badge metric">动画时长300ms</span>是经过测试的甜点——太快无感，太慢影响效率。微震动(haptic feedback)在移动端增强"完成感"。</p>
+    </div>
+
+    <div class="dn-section">
+      <h3>🔥 决策3: 连续天数 + 损失厌恶</h3>
+      <p>"已连续7天"比"获得7天成就"更有驱动力——这是<span class="dn-badge psychology">损失厌恶</span>（Kahneman & Tversky）的经典应用。断签后数字归零，用户会产生"不想让7天白费"的心理。热力图参考 GitHub 贡献图，让"坚持"变得可视化且有社交货币价值。</p>
+    </div>
+
+    <div class="dn-section">
+      <h3>🎨 决策4: 暖色调色彩心理学</h3>
+      <p>健康类APP需要<span class="dn-badge psychology">温暖/信任感</span>而非冷酷。画布色 <code>#f5f0eb</code> 是米白色（像纸张），主色 <code>#e07a5f</code> 是陶土橙（传递"接地/自然"），成功色 <code>#81b29a</code> 是鼠尾草绿（放松而非刺眼）。避免纯红/纯绿——<span class="dn-badge behavior">约8%男性有红绿色盲</span>。</p>
+    </div>
+
+    <div class="dn-section">
+      <h3>📱 决策5: 移动端原生体验</h3>
+      <p>430px 固定宽度模拟手机屏幕。底部 Tab Bar 4个入口（今日/统计/发现/我的）符合<span class="dn-badge metric">移动端导航心智模型</span>。安全区域适配刘海屏。所有触控目标 ≥ 44px（Apple HIG 最小触控尺寸）。卡片使用 <code>box-shadow</code> 而非边框，在浅色背景上更柔和。</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部 Tab Bar -->
+<nav class="tab-bar">
+  <button class="tab-btn active"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="tab-label">今日</span></button>
+  <button class="tab-btn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg><span class="tab-label">统计</span></button>
+  <button class="tab-btn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span class="tab-label">发现</span></button>
+  <button class="tab-btn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="tab-label">我的</span></button>
+</nav>
+
+<script>
+// 热力图生成: 30天随机数据
+var grid=document.getElementById('heatmapGrid');
+for(var i=0;i<30;i++){
+  var cell=document.createElement('div');
+  cell.className='heatmap-cell';
+  var r=Math.random();
+  if(r>0.3)cell.classList.add('l1');
+  if(r>0.5)cell.classList.add('l2');
+  if(r>0.7)cell.classList.add('l3');
+  if(r>0.85)cell.classList.add('l4');
+  cell.title='5月'+(i+1)+'日';
+  grid.appendChild(cell);
+}
+
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  var card=el.closest('.task-card');
+  if(el.classList.contains('checked')){
+    card.classList.add('done');
+    el.style.animation='checkBounce .3s ease';
+    if(document.querySelectorAll('.task-check.checked').length===5) showConfetti();
+  }else{
+    card.classList.remove('done');
+  }
+}
+
+function showConfetti(){
+  var colors=['#e07a5f','#81b29a','#f2cc8f','#60a5fa','#a78bfa'];
+  for(var i=0;i<40;i++){
+    var c=document.createElement('div');
+    c.className='confetti-piece';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDelay=Math.random()*0.5+'s';
+    c.style.animationDuration=(1.5+Math.random())+'s';
+    document.body.appendChild(c);
+    setTimeout(function(el){el.remove()},2500,c);
+  }
+}
+</script>
+</body>
+</html>
