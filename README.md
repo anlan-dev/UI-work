@@ -13,6 +13,10 @@
 | 05 | **GlobalCart 跨境电商** | 电商扁平 | 中/英/日三语 i18n、双币价格、AI 智能推荐 |
 | 06 | **创作工作台** | 多主题 | 三栏布局、4 套主题、角色管理、多格式导出 |
 | 07 | **Prompt Library** | 新拟物极简 | 搜索收藏、使用统计、LocalStorage 持久化 |
+| 08 | **Lofi 玻璃态音乐播放器** | Glassmorphism | 毛玻璃 backdrop-filter、韵律波动画、沉浸深色背景 |
+| 09 | **NEON 赛博朋克数据看板** | Cyberpunk / Neon | 霓虹色板、网格背景、等宽字体数据、系统负载监控 |
+| 10 | **粋·SUI 日式极简任务管理** | 侘寂极简 | 大量留白、衬线字体、米白画布、朱红单色强调 |
+| 11 | **BRUTAL STUDIO 粗野主义品牌** | Brutalism | 纯黑白+红、零圆角、超大字重、粗边框 |
 
 ## 🧠 设计理念
 
@@ -29,6 +33,10 @@
 |------|------|----------|----------|
 | **A. 新拟物** | 双向阴影、柔和凹凸 | 工具类、健康类、效率类 | 宠伴、Prompt Library |
 | **B. 扁平/Apple HIG** | 渐变、阴影、简洁 | 数据密集型、电商、专业工具 | MoneyFlow、CloudSync |
+| **C. Glassmorphism** | backdrop-filter 毛玻璃、半透明层次 | 音乐/娱乐/氛围类产品 | Lofi 音乐播放器 |
+| **D. Cyberpunk / Neon** | 霓虹色、网格背景、荧光高亮 | 游戏/科技数据产品 | NEON 数据看板 |
+| **E. 日式极简 / 侘寂** | 大量留白、衬线字体、自然色 | 效率/创意工具 | 粋·SUI 任务管理 |
+| **F. Brutalism** | 零圆角、粗边框、纯对比色 | 先锋品牌/艺术机构 | BRUTAL STUDIO |
 
 ## 🛠 技术实现
 
@@ -38,20 +46,30 @@
 - **SVG 动画** — 进度环、图标动效
 - **LocalStorage** — 数据持久化（Prompt Library）
 - **Chart.js** — 数据可视化（财务仪表盘、宠物台账）
+- **backdrop-filter** — 毛玻璃效果（Glassmorphism 音乐播放器）
+- **CSS Grid + 文字阴影** — 霓虹灯管效果（Cyberpunk 数据看板）
+- **Noto Serif SC** — 衬线字体营造人文质感（侘寂任务管理）
+- **墨刀标注系统** — 自研原型标注交互（modao-annotations.js / .css）
 - **多端适配** — 响应式设计，支持 430px 移动端到 1440px 桌面端
 
 ## 📁 项目结构
 
 ```
 UIwork/
-├── index.html              ← 作品集首页（暗色风格、毛玻璃导航）
+├── index.html                ← 作品集首页（暗色风格、毛玻璃导航）
 ├── 01-finance-dashboard.html
 ├── 02-health-tracker.html
 ├── 03-saas-pricing.html
 ├── 04-pet-vaccine.html
 ├── 05-cross-border-ai.html
 ├── 06-creation-cabin.html
-└── 07-prompt-library.html
+├── 07-prompt-library.html
+├── 08-glassmorphism.html
+├── 09-cyberpunk.html
+├── 10-japanese-minimal.html
+├── 11-brutalist.html
+├── modao-annotations.css     ← 墨刀原型标注样式
+└── modao-annotations.js      ← 墨刀原型标注逻辑
 ```
 
 ## 🚀 本地预览
@@ -69,16 +87,18 @@ cd UI-work
 
 ## 📊 设计决策统计
 
-- **作品数量**: 7 个
-- **设计决策**: 30+ 个
-- **心理学理论**: 12 个
-- **设计风格**: 3 种（新拟物、扁平、多主题）
+- **作品数量**: 11 个
+- **设计决策**: 45+ 个
+- **心理学理论**: 16 个
+- **设计风格**: 6 种（新拟物、扁平、Glassmorphism、Cyberpunk、侘寂、Brutalism）
 - **响应式断点**: 430px / 768px / 1024px / 1440px
+- **墨刀标注系统**: 自研原型标注交互（modao-annotations.js）
 
 ## 🔗 相关链接
 
 - **GitHub**: [anlan-dev/UI-work](https://github.com/anlan-dev/UI-work)
 - **PM 作品集**: [anlan-dev/pm-works-demos](https://github.com/anlan-dev/pm-works-demos)
+- **PM 作品集（本地）**: [../work/index.html](../work/index.html) — 需求取舍、用户验证、指标口径的完整产品案例
 - **Email**: wangtj0212@gmail.com
 
 ---
