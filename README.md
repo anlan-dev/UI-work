@@ -99,7 +99,7 @@ cd UI-work
 - **GitHub**: [anlan-dev/UI-work](https://github.com/anlan-dev/UI-work)
 - **PM 作品集**: [anlan-dev/pm-works-demos](https://github.com/anlan-dev/pm-works-demos)
 - **PM 作品集（本地）**: [../work/index.html](../work/index.html) — 需求取舍、用户验证、指标口径的完整产品案例
-- **Email**: wangtj0212@gmail.com
+- **Email**: Wangtj0212@outlook.com
 
 ---
 
