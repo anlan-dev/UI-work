@@ -6,20 +6,18 @@
     ╔══════════════════════════════════════════════════════════════╗
     ║  DESIGN.md · Prompt Library · Vibe Coding 工作台              ║
     ║  Spec: design-systems/prompt-library/DESIGN.md               ║
-    ║  Family: 新拟物 (Neumorphism)                               ║
-    ║  Colors: canvas=#e6e6e6 / surface=#dedede / accent=#5a6a7a ║
-    ║          code-bg=#f0f0f0 / code-border=#d8d8d8              ║
-    ║          accent-green=#7a8a6a / accent-red=#8a6a6a           ║
+    ║  Family: 工具效率类 (Utility Tool)                           ║
+    ║  Colors: canvas=#f5f5f7 / surface=#ffffff / primary=#0071e3 ║
+    ║          accent-purple=#8b5cf6 / accent-green=#10b981        ║
     ║  Font: 'Inter', 'Noto Sans SC' / Mono: 'JetBrains Mono'    ║
-    ║  Rounded: sm=16 / md=28 / lg=32 / pill=40                  ║
-    ║  Shadow: -8px -8px 16px rgba(255,255,255,0.66),            ║
-    ║          8px 8px 16px rgba(0,0,0,0.12)                     ║
-    ║  Spacing: 8px base                                          ║
+    ║  Rounded: sm=8 / md=12 / lg=16                              ║
+    ║  Shadow: 0 2px 8px rgba(0,0,0,.06)                         ║
+    ║  Spacing: 4px base                                          ║
     ║  Components: search-bar / prompt-card / code-block           ║
     ║              category-nav / favorite-toggle / stats-bar      ║
     ╚══════════════════════════════════════════════════════════════╝
   -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Prompt Library · Vibe Coding 工作台</title>
@@ -39,21 +37,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  /* ===== 工具效率类：白卡片+浅灰画布 ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
   :root{
-    --bg:#e6e6e6;--bg2:#dedede;
-    --text:#3f3f3f;--text2:#6b6b6b;--text3:#999;
-    --accent:#5a6a7a;--accent2:#7a8a6a;--accent3:#8a6a6a;
-    --sl:rgba(255,255,255,0.66);--sd:rgba(0,0,0,0.12);--sd2:rgba(0,0,0,0.18);
-    --r1:16px;--r2:28px;--r3:32px;--r4:40px;
-    --code-bg:#f0f0f0;--code-border:#d8d8d8;
+    --bg:#f5f5f7;--bg2:#ffffff;
+    --text:#1d1d1f;--text2:#6e6e73;--text3:#8e8e93;
+    --accent:#0071e3;--accent2:#8b5cf6;--accent3:#10b981;
+    --sl:rgba(0,0,0,0.02);--sd:rgba(0,0,0,0.06);--sd2:rgba(0,0,0,0.1);
+    --r1:8px;--r2:12px;--r3:16px;--r4:20px;
+    --code-bg:#f5f5f7;--code-border:rgba(0,0,0,0.06);
     --safe-b:env(safe-area-inset-bottom,0px);
   }
   html{scroll-behavior:smooth}
   body{
-    background:#F5F5F7;min-height:100vh;min-height:100dvh;
+    background:var(--bg);min-height:100vh;min-height:100dvh;
     font-family:'Inter','Noto Sans SC',system-ui,-apple-system,sans-serif;
     color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden;padding:10px;padding-bottom:calc(90px + var(--safe-b));
+    overflow-x:hidden;padding-bottom:calc(80px + var(--safe-b));
   }
   .app{max-width:760px;margin:0 auto;padding:16px 16px 24px}
 
@@ -118,8 +118,8 @@
   .footer-badge a{color:var(--accent);text-decoration:none}
 
   .search-bar{margin:12px 0 16px}
-  .search-input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:var(--r2);font-size:.85rem;font-family:inherit;color:var(--text);background:var(--surface);outline:none;transition:all .2s}
-  .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow)}
+  .search-input{width:100%;padding:12px 16px;border:none;border-radius:var(--r2);font-size:.85rem;font-family:inherit;color:var(--text);background:var(--bg);box-shadow:inset 4px 4px 8px rgba(0,0,0,.06),inset -4px -4px 8px rgba(255,255,255,.5);outline:none;transition:box-shadow .2s}
+  .search-input:focus{box-shadow:inset 4px 4px 8px rgba(0,0,0,.08),inset -4px -4px 8px rgba(255,255,255,.4),0 0 0 2px var(--accent)}
   .search-input::placeholder{color:var(--text3)}
   .search-hint{font-size:.75rem;color:var(--text3);margin-top:6px;padding-left:4px;min-height:1.2em}
 
@@ -205,6 +205,7 @@ html{-webkit-tap-highlight-color:transparent}a,button,[onclick],summary,select,i
 @keyframes skeleton-pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 </style>
   <link rel="stylesheet" href="./dev-flow.css">
+  <link rel="stylesheet" href="./neumorphic-shared.css">
 </head>
 <body>
 <div class="app">
@@ -1269,63 +1270,6 @@ document.addEventListener('keydown', function(e) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./demo-sw.js').catch(function() {});
 }
-</script>
-
-<style>
-.portfolio-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
-.portfolio-reveal.visible{opacity:1;transform:translateY(0)}
-.portfolio-reveal[data-delay="100"]{transition-delay:.1s}
-.portfolio-reveal[data-delay="200"]{transition-delay:.2s}
-.portfolio-reveal[data-delay="300"]{transition-delay:.3s}
-.ui-portfolio-notes{max-width:800px;margin:40px auto;padding:28px;background:var(--bg,#e6e6e6);border-radius:var(--r2,28px);box-shadow:-8px -8px 16px rgba(255,255,255,0.66),8px 8px 16px rgba(0,0,0,0.12)}
-.ui-portfolio-notes h2{font-size:1.05rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.ui-portfolio-notes h2 .icon{width:32px;height:32px;border-radius:8px;background:rgba(90,106,122,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem}
-.dn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.dn-card{padding:16px;border-radius:var(--r1,16px);background:rgba(255,255,255,0.3);border:1px solid rgba(0,0,0,0.04);transition:all .25s}
-.dn-card:hover{box-shadow:-4px -4px 8px rgba(255,255,255,0.5),4px 4px 8px rgba(0,0,0,0.08);transform:translateY(-2px)}
-.dn-card h3{font-size:.8rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.dn-card h3 .tag{font-size:.56rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
-.dn-card h3 .tag.theory{background:rgba(90,106,122,0.08);color:#5a6a7a}
-.dn-card h3 .tag.psychology{background:rgba(122,138,106,0.08);color:#7a8a6a}
-.dn-card h3 .tag.metric{background:rgba(138,106,106,0.08);color:#8a6a6a}
-.dn-card p{font-size:.74rem;color:var(--text2,#6b6b6b);line-height:1.7}
-.dn-card code{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--code-bg,#f0f0f0);padding:1px 4px;border-radius:4px}
-@media(max-width:768px){.dn-grid{grid-template-columns:1fr}}
-</style>
-
-<section class="ui-portfolio-notes portfolio-reveal" data-delay="200">
-  <h2><span class="icon">📋</span> 设计决策说明（PM视角）</h2>
-  <div class="dn-grid">
-    <div class="dn-card">
-      <h3><span class="tag theory">设计</span> 新拟物极简风格</h3>
-      <p>双向阴影 <code>-8px -8px 16px rgba(255,255,255,0.66), 8px 8px 16px rgba(0,0,0,0.12)</code> 塑造柔和凹凸感。大圆角（28-40px）传递"友好/无威胁"的品牌调性。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag psychology">心理学</span> JetBrains Mono 代码块</h3>
-      <p>等宽字体让 Prompt 结构一目了然——变量用 <code>{{placeholder}}</code> 高亮，用户能快速识别需要替换的部分。<strong>格式即语义</strong>。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag metric">数据</span> 收藏 + 使用统计驱动复用</h3>
-      <p>LocalStorage 持久化收藏和使用次数。<strong>高频 Prompt 自动排前</strong>——参考浏览器历史记录的"最近/最常用"排序策略。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag theory">设计</span> 搜索 + 分类标签过滤</h3>
-      <p>搜索框置顶（Fitts's Law 最短路径），分类标签支持多选组合过滤。<strong>Progressive Disclosure</strong>：默认展示热门分类，展开查看全部。</p>
-    </div>
-  </div>
-</section>
-
-<script>
-(function(){
-  var els=document.querySelectorAll('.portfolio-reveal');
-  if(!els.length)return;
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
-    });
-  },{threshold:0.1});
-  els.forEach(function(el){obs.observe(el)});
-})();
 </script>
 </body>
 </html>

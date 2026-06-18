@@ -6,19 +6,19 @@
       ╔══════════════════════════════════════════════════════════════╗
       ║  DESIGN.md · GlobalFUN · 跨境拼团                            ║
       ║  Spec: design-systems/cross-border-ai/DESIGN.md             ║
-      ║  Family: 电商扁平 (E-commerce Flat)                          ║
-      ║  Colors: canvas=#f5f7fb / surface=#e6e6e6 / primary=#2563eb║
-      ║          success=#059669 / warning=#d97706                   ║
-      ║  Font: 'Inter', 'Noto Sans SC', system-ui, sans-serif       ║
-      ║  Rounded: sm=8 / md=12 / pill=999                           ║
-      ║  Shadow: 0 4px 12px rgba(37,99,235,0.2)                    ║
-      ║  Spacing: 8px base                                          ║
+      ║  Family: 企业服务类 (Premium Authority)                      ║
+      ║  Colors: canvas=#f8fafc / surface=#ffffff / primary=#1e4a6b ║
+      ║          accent=#0071e3 / success=#10b981                    ║
+      ║  Font: 'Inter', 'Noto Sans SC', system-ui                  ║
+      ║  Rounded: sm=8 / md=12 / lg=16                              ║
+      ║  Shadow: 0 2px 8px rgba(0,0,0,.06)                         ║
+      ║  Spacing: 4px base                                          ║
       ║  i18n: 中文 / English / 日本語 (localStorage 持久化)         ║
       ║  Components: app-shell / top-bar / lang-switcher             ║
       ║              product-card / group-buy-banner / cart-sheet    ║
       ╚══════════════════════════════════════════════════════════════╝
     -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>🌍 GlobalFUN · 全球好物跨境拼团</title>
     <meta name="description" content="GlobalFUN — AI 智能推荐跨境拼团平台，多语言切换、实时汇率、拼团下单全流程体验。">
     <!-- Open Graph / Facebook -->
@@ -31,15 +31,24 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="GlobalFUN · 全球好物跨境拼团">
     <meta name="twitter:description" content="AI 智能推荐跨境拼团平台，多语言切换、实时汇率、拼团下单全流程体验。">
+    <link rel="stylesheet" href="./neumorphic-shared.css">
     <style>
+        /* ===== 企业服务类：深蓝+白卡片 ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
         :root {
-            --bg: #f5f7fb;
-            --card: #e6e6e6;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --line: #e5e7eb;
-            --primary: #2563eb;
-            --primary-soft: #dbeafe;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --card-border: rgba(0,0,0,0.04);
+            --text: #1d1d1f;
+            --muted: #6e6e73;
+            --line: rgba(0,0,0,0.04);
+            --primary: #1e4a6b;
+            --primary-soft: rgba(30,74,107,0.08);
+            --accent: #0071e3;
+            --success: #10b981;
+            --shadow: 0 2px 8px rgba(0,0,0,.06);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
         }
         * {
             margin: 0;
@@ -48,8 +57,7 @@
             font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
         }
         body {
-            background: #F5F5F7;
-            padding: 10px;
+            background: var(--bg);
             display: flex;
             justify-content: center;
             min-height: 100vh;
@@ -1595,6 +1603,21 @@ body {
 .skeleton-line:last-child { width: 60%; }
 .skeleton-card { padding: 16px; margin-bottom: 12px; border-radius: var(--radius); }
 @keyframes skeleton-pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Ripple effect */
+@keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+/* AI推荐卡片hover增强 */
+.ai-rec-item { transition: all 0.2s ease; cursor: pointer; }
+.ai-rec-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+.ai-rec-item:active { transform: scale(0.97); }
+
+/* 按钮点击反馈 */
+.primary-btn:active, .share-btn:active, .neu-btn:active { transform: scale(0.96); }
+.ai-trans-toggle:active { transform: scale(0.95); }
+
+/* 实时动态入场动画 */
+@keyframes feedSlideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -2045,8 +2068,8 @@ body {
     <div style="padding:8px 20px;">
         <button class="primary-btn" id="mainActionBtn">登录后开启跨境拼团</button>
         <div style="display:flex;justify-content:center;gap:12px;margin-top:12px;">
-            <button class="share-btn" id="shareTriggerBtn">📤 分享拼团</button>
-            <button class="share-btn" id="copyLinkBtn">🔗 复制链接</button>
+            <button class="share-btn" id="shareTriggerBtn" onclick="(function(){var o=document.getElementById('shareOverlay');if(o){o.style.visibility='visible';o.style.opacity='1';var p=o.querySelector('.share-panel');if(p)p.style.transform='translateY(0)';}})()">📤 分享拼团</button>
+            <button class="share-btn" id="copyLinkBtn" onclick="(function(){var t=document.createElement('textarea');t.value=location.href;t.style.cssText='position:fixed;left:-9999px;';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);var toast=document.getElementById('toast');if(toast){toast.textContent='✅ 链接已复制';toast.style.opacity='1';setTimeout(function(){toast.style.opacity='0'},2000);}})()">🔗 复制链接</button>
         </div>
     </div>
 
@@ -2215,20 +2238,20 @@ body {
 </div>
 
 <!-- ====== 分享浮层 ====== -->
-<div class="share-overlay" id="shareOverlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:4000;display:flex;align-items:flex-end;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s;">
+<div class="share-overlay" id="shareOverlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:4000;display:flex;align-items:flex-end;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s;" onclick="if(event.target===this){this.style.opacity='0';this.querySelector('.share-panel').style.transform='translateY(100%)';var self=this;setTimeout(function(){self.style.visibility='hidden'},300)}">
     <div class="share-panel" style="background:var(--bg);width:100%;max-width:430px;border-radius:32px 32px 0 0;padding:24px 20px 30px;transform:translateY(100%);transition:transform 0.25s;">
         <div style="font-weight:700;font-size:18px;margin-bottom:20px;text-align:center;">📲 分享拼团</div>
         <div style="display:flex;justify-content:space-around;">
-            <div class="channel-item" data-channel="wechat" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;">
+            <div class="channel-item" data-channel="wechat" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;" onclick="event.stopPropagation();alert('💬 请截图分享到微信');var o=document.getElementById('shareOverlay');if(o){o.style.opacity='0';o.querySelector('.share-panel').style.transform='translateY(100%)';setTimeout(function(){o.style.visibility='hidden'},300)}">
                 <div style="width:56px;height:56px;border-radius:28px;background:var(--bg);box-shadow:var(--neu-shadow);display:flex;align-items:center;justify-content:center;font-size:28px;">💬</div>
                 <span>微信</span>
             </div>
-            <div class="channel-item" data-channel="copy" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;">
+            <div class="channel-item" data-channel="copy" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;" onclick="event.stopPropagation();var t=document.createElement('textarea');t.value=location.href;t.style.cssText='position:fixed;left:-9999px;';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('✅ 链接已复制');var o=document.getElementById('shareOverlay');if(o){o.style.opacity='0';o.querySelector('.share-panel').style.transform='translateY(100%)';setTimeout(function(){o.style.visibility='hidden'},300)}">
                 <div style="width:56px;height:56px;border-radius:28px;background:var(--bg);box-shadow:var(--neu-shadow);display:flex;align-items:center;justify-content:center;font-size:28px;">🔗</div>
                 <span>复制</span>
             </div>
         </div>
-        <div style="margin-top:20px;text-align:center;color:#94a3b8;padding:12px;cursor:pointer;" id="closeSharePanel">取消</div>
+        <div style="margin-top:20px;text-align:center;color:#94a3b8;padding:12px;cursor:pointer;" id="closeSharePanel" onclick="event.stopPropagation();var o=document.getElementById('shareOverlay');if(o){o.style.opacity='0';o.querySelector('.share-panel').style.transform='translateY(100%)';setTimeout(function(){o.style.visibility='hidden'},300)}">取消</div>
     </div>
 </div>
 
@@ -2730,13 +2753,17 @@ body {
             if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
                 if (diffX > 0) {
                     // 右滑：返回上一页或关闭面板
-                    if (els.chatOverlay.style.visibility === 'visible') {
-                        els.chatClose.click();
+                    const overlay = document.getElementById('aiChatOverlay');
+                    if (overlay && overlay.style.visibility === 'visible') {
+                        const closeBtn = document.getElementById('aiChatClose');
+                        if (closeBtn) closeBtn.click();
                     }
                 } else {
                     // 左滑：打开AI面板
-                    if (els.chatOverlay.style.visibility !== 'visible') {
-                        els.aiFab.click();
+                    const overlay = document.getElementById('aiChatOverlay');
+                    if (overlay && overlay.style.visibility !== 'visible') {
+                        const fabBtn = document.getElementById('aiFab');
+                        if (fabBtn) fabBtn.click();
                     }
                 }
             }
@@ -2751,11 +2778,7 @@ body {
             showToast(isLoggedIn ? '已登录' : '已退出');
         });
 
-        els.mainAction.addEventListener('click', () => {
-            if(!isLoggedIn) { showToast('请先登录'); return; }
-            els.payModal.style.visibility = 'visible';
-            els.payModal.style.opacity = '1';
-        });
+        // mainAction click handler moved to order flow section (line ~3239) to avoid duplicate binding
 
         els.cancelPay.addEventListener('click', () => {
             els.payModal.style.visibility = 'hidden';
@@ -2768,17 +2791,34 @@ body {
             showToast('✅ 支付成功');
         });
 
-        els.aiFab.addEventListener('click', () => {
-            els.chatOverlay.style.visibility = 'visible';
-            els.chatOverlay.style.opacity = '1';
-            els.chatOverlay.querySelector('.ai-chat-panel').style.transform = 'translateY(0)';
-        });
+        // AI 浮动按钮 — 打开对话面板
+        const fabBtn = document.getElementById('aiFab');
+        if (fabBtn) {
+            fabBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const overlay = document.getElementById('aiChatOverlay');
+                if (overlay) {
+                    overlay.style.visibility = 'visible';
+                    overlay.style.opacity = '1';
+                    const panel = overlay.querySelector('.ai-chat-panel');
+                    if (panel) panel.style.transform = 'translateY(0)';
+                }
+            });
+        }
         
-        els.chatClose.addEventListener('click', () => {
-            els.chatOverlay.style.opacity = '0';
-            els.chatOverlay.querySelector('.ai-chat-panel').style.transform = 'translateY(100%)';
-            setTimeout(() => els.chatOverlay.style.visibility = 'hidden', 300);
-        });
+        // AI 对话面板 — 关闭
+        const closeBtn = document.getElementById('aiChatClose');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const overlay = document.getElementById('aiChatOverlay');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    const panel = overlay.querySelector('.ai-chat-panel');
+                    if (panel) panel.style.transform = 'translateY(100%)';
+                    setTimeout(() => overlay.style.visibility = 'hidden', 300);
+                }
+            });
+        }
 
         // AI 对话事件
         els.chatSend.addEventListener('click', () => {
@@ -2802,7 +2842,6 @@ body {
                 if (query) handleUserMessage(query);
             });
         });
-    })();
 
         // ====== D: Debug Mode (面试官模式) ======
         let debugMode = false;
@@ -3255,6 +3294,320 @@ body {
 
         // Remove old pay modal events (they are overwritten by order flow)
         // The old pay modal is still in DOM but won't be triggered
+
+        // ====== 缺失的事件绑定修复 ======
+        // 分享按钮
+        const shareTrigger = document.getElementById('shareTriggerBtn');
+        if (shareTrigger) {
+            shareTrigger.addEventListener('click', () => {
+                const overlay = document.getElementById('shareOverlay');
+                if (overlay) {
+                    overlay.style.visibility = 'visible';
+                    overlay.style.opacity = '1';
+                    overlay.querySelector('.share-panel').style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // 关闭分享面板
+        const closeSharePanel = document.getElementById('closeSharePanel');
+        if (closeSharePanel) {
+            closeSharePanel.addEventListener('click', () => {
+                const overlay = document.getElementById('shareOverlay');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    overlay.querySelector('.share-panel').style.transform = 'translateY(100%)';
+                    setTimeout(() => overlay.style.visibility = 'hidden', 300);
+                }
+            });
+        }
+
+        // 安全复制函数
+        function safeCopy(text) {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast('✅ 链接已复制');
+                    }).catch(() => {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            } catch (e) {
+                fallbackCopy(text);
+            }
+        }
+        function fallbackCopy(text) {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.cssText = 'position:fixed;left:-9999px;';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('✅ 链接已复制');
+            } catch (e) {
+                showToast('复制失败，请长按地址栏手动复制');
+            }
+        }
+
+        // 分享渠道点击
+        document.querySelectorAll('.channel-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const channel = item.dataset.channel;
+                if (channel === 'wechat') {
+                    showToast('💬 请截图分享到微信');
+                } else if (channel === 'copy') {
+                    safeCopy(window.location.href);
+                }
+                // 关闭分享面板
+                const overlay = document.getElementById('shareOverlay');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    const panel = overlay.querySelector('.share-panel');
+                    if (panel) panel.style.transform = 'translateY(100%)';
+                    setTimeout(() => overlay.style.visibility = 'hidden', 300);
+                }
+            });
+        });
+
+        // 复制链接
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', function() {
+                safeCopy(window.location.href);
+            });
+        }
+
+        // 翻译切换
+        const transToggle = document.getElementById('transToggle');
+        if (transToggle) {
+            let showOriginal = false;
+            const reviewItems = document.querySelectorAll('.review-item');
+            transToggle.addEventListener('click', () => {
+                showOriginal = !showOriginal;
+                transToggle.textContent = showOriginal ? '中文翻译' : '日文原文';
+                reviewItems.forEach(item => {
+                    const italicDiv = item.querySelector('div[style*="font-style:italic"]');
+                    const normalDiv = item.querySelector('div:not([style*="font-style"]):last-of-type');
+                    if (italicDiv && normalDiv) {
+                        if (showOriginal) {
+                            italicDiv.style.display = 'block';
+                            normalDiv.style.display = 'none';
+                        } else {
+                            italicDiv.style.display = 'none';
+                            normalDiv.style.display = 'block';
+                        }
+                    }
+                });
+            });
+        }
+
+        // 加载更多评价
+        const loadMoreReviews = document.getElementById('loadMoreReviews');
+        if (loadMoreReviews) {
+            loadMoreReviews.addEventListener('click', () => {
+                showToast('📝 更多评价加载中...');
+                const container = loadMoreReviews.parentElement;
+                const newReviews = [
+                    { name: '🌸 佐藤ゆき', stars: '★★★★★', orig: '肌荒れが改善しました。リピート決定！', trans: '皮肤粗糙改善了，决定回购！' },
+                    { name: '🍀 山本みどり', stars: '★★★★☆', orig: '保湿力は高いですが、香りが少し強いです。', trans: '保湿力很强，但香味稍微有点浓。' }
+                ];
+                setTimeout(() => {
+                    newReviews.forEach(r => {
+                        const div = document.createElement('div');
+                        div.className = 'review-item';
+                        div.style.marginBottom = '10px';
+                        div.style.padding = '14px';
+                        div.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-weight:600;font-size:14px;color:var(--text);">${r.name}</span><span style="color:#f59e0b;font-size:13px;">${r.stars}</span></div><div style="font-size:13px;color:var(--muted);margin-bottom:4px;font-style:italic;">${r.orig}</div><div style="font-size:13px;color:var(--text);">${r.trans}</div>`;
+                        container.insertBefore(div, loadMoreReviews);
+                    });
+                    loadMoreReviews.textContent = '✅ 已加载全部评价';
+                    loadMoreReviews.style.pointerEvents = 'none';
+                    loadMoreReviews.style.opacity = '0.5';
+                }, 1000);
+            });
+        }
+
+        // ====== AI推荐卡片点击 ======
+        document.querySelectorAll('.ai-rec-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', () => {
+                const name = item.querySelector('.ai-rec-name').textContent;
+                const price = item.querySelector('.ai-rec-price').textContent;
+                showToast(`🔍 正在查看 ${name}...`);
+                // 模拟跳转到商品详情
+                setTimeout(() => {
+                    const productEmoji = item.querySelector('.ai-rec-emoji').textContent;
+                    const mainEmoji = document.querySelector('.product-emoji');
+                    const mainName = document.querySelector('.product-name');
+                    if (mainEmoji) mainEmoji.textContent = productEmoji;
+                    if (mainName) {
+                        mainName.innerHTML = `${name} <span class="en">AI Recommended</span>`;
+                    }
+                    showToast(`✅ 已切换到 ${name}`);
+                    // 滚动到商品区域
+                    document.querySelector('.product-media').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            });
+        });
+
+        // ====== AI推荐换一批 ======
+        const aiRecRefresh = document.getElementById('aiRecRefresh');
+        if (aiRecRefresh) {
+            const products = [
+                [
+                    { emoji: '🧴', name: 'SK-II 神仙水', price: '¥899 · 比专柜省¥400', reason: '⭐ 跨境热销TOP1' },
+                    { emoji: '🐟', name: 'Swisse 鱼油胶囊', price: '¥159 · 澳洲直邮', reason: '⭐ 好评率98%' },
+                    { emoji: '🌸', name: 'Chanel N°5 香水', price: '¥699 · 免税价', reason: '⭐ 限时拼团中' },
+                    { emoji: '💆', name: 'Mediheal 面膜10片', price: '¥69 · 首单包邮', reason: '⭐ 新人专享价' }
+                ],
+                [
+                    { emoji: '🍵', name: '宇治抹茶粉 100g', price: '¥89 · 日本直邮', reason: '⭐ 限定产地' },
+                    { emoji: '👟', name: 'Nike Air Max 90', price: '¥459 · 美国直邮', reason: '⭐ 比官网省¥300' },
+                    { emoji: '💊', name: 'DHC 维生素B群', price: '¥39 · 日本药妆', reason: '⭐ 回购率95%' },
+                    { emoji: '🧸', name: 'Jellycat 巴塞罗那熊', price: '¥199 · 英国直邮', reason: '⭐ 送礼首选' }
+                ],
+                [
+                    { emoji: '☕', name: 'UCC 职人咖啡', price: '¥45 · 日本进口', reason: '⭐ 办公室爆款' },
+                    { emoji: '🧴', name: 'La Mer 面霜 30ml', price: '¥1299 · 免税仓', reason: '⭐ 比专柜省¥800' },
+                    { emoji: '🍫', name: 'Royce 生巧克力', price: '¥129 · 北海道直发', reason: '⭐ 冷链保鲜' },
+                    { emoji: '🎒', name: 'Samsonite 行李箱', price: '¥599 · 美国仓', reason: '⭐ 旅行必备' }
+                ]
+            ];
+            let currentSet = 0;
+            aiRecRefresh.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSet = (currentSet + 1) % products.length;
+                const grid = document.getElementById('aiRecGrid');
+                const items = grid.querySelectorAll('.ai-rec-item');
+                products[currentSet].forEach((p, i) => {
+                    if (items[i]) {
+                        items[i].querySelector('.ai-rec-emoji').textContent = p.emoji;
+                        items[i].querySelector('.ai-rec-name').textContent = p.name;
+                        items[i].querySelector('.ai-rec-price').textContent = p.price;
+                        items[i].querySelector('.ai-rec-reason').textContent = p.reason;
+                    }
+                });
+                showToast('🔄 已刷新推荐');
+            });
+        }
+
+        // ====== 物流查看详情 ======
+        document.querySelectorAll('[style*="cursor:pointer"]').forEach(el => {
+            if (el.textContent.includes('查看详情')) {
+                el.addEventListener('click', () => {
+                    showToast('📦 物流详情：大阪→上海浦东 已清关，预计明天送达');
+                });
+            }
+            if (el.textContent.includes('查看全部')) {
+                el.addEventListener('click', () => {
+                    showToast('👥 今日已有 128 人参与拼团，23 人拼团成功');
+                });
+            }
+        });
+
+        // ====== 实时倒计时 ======
+        (function startCountdown() {
+            let totalSeconds = 2 * 3600 + 28 * 60 + 45;
+            const hourEl = document.getElementById('hour');
+            const minuteEl = document.getElementById('minute');
+            const secondEl = document.getElementById('second');
+            if (!hourEl || !minuteEl || !secondEl) return;
+            setInterval(() => {
+                totalSeconds--;
+                if (totalSeconds <= 0) totalSeconds = 2 * 3600 + 28 * 60 + 45;
+                const h = Math.floor(totalSeconds / 3600);
+                const m = Math.floor((totalSeconds % 3600) / 60);
+                const s = totalSeconds % 60;
+                hourEl.textContent = String(h).padStart(2, '0');
+                minuteEl.textContent = String(m).padStart(2, '0');
+                secondEl.textContent = String(s).padStart(2, '0');
+            }, 1000);
+        })();
+
+        // ====== 实时动态自动滚动 ======
+        (function startLiveFeed() {
+            const feed = document.getElementById('liveFeed');
+            if (!feed) return;
+            const names = ['小红', '阿杰', '莉莉', '小王', '安娜', '大卫', '小美', '老张'];
+            const emojis = ['🐱', '🐰', '🌸', '🍀', '😊', '🎈', '🌟', '🐻'];
+            const sources = ['微信', '小程序', 'APP', 'H5'];
+            setInterval(() => {
+                const name = names[Math.floor(Math.random() * names.length)];
+                const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                const source = sources[Math.floor(Math.random() * sources.length)];
+                const isGroup = Math.random() > 0.3;
+                const div = document.createElement('div');
+                div.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px;opacity:0;transform:translateY(-10px);transition:all 0.3s;';
+                div.innerHTML = `<div style="width:32px;height:32px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">${emoji}</div><div style="flex:1;"><div style="font-size:13px;color:var(--text);"><span style="font-weight:600;">${name}</span> ${isGroup ? '刚刚拼团成功' : '正在拼团中'}</div><div style="font-size:11px;color:var(--muted);">刚刚 · 来自${source}</div></div><div style="font-size:12px;background:${isGroup ? '#dcfce7' : '#fef3c7'};color:${isGroup ? '#16a34a' : '#d97706'};padding:4px 8px;border-radius:4px;">${isGroup ? '已成团' : '进行中'}</div>`;
+                feed.insertBefore(div, feed.firstChild);
+                requestAnimationFrame(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; });
+                // 保持最多5条
+                while (feed.children.length > 5) feed.removeChild(feed.lastChild);
+                // 更新总数
+                const totalEl = feed.parentElement.querySelector('[style*="128"]');
+                if (totalEl) {
+                    const current = parseInt(totalEl.textContent) || 128;
+                    totalEl.textContent = current + 1;
+                }
+            }, 8000);
+        })();
+
+        // ====== 拼团进度动画 ======
+        (function animateProgress() {
+            const progressBar = document.querySelector('.countdown-section + .neu-card div[style*="width:66%"]');
+            if (!progressBar) return;
+            let width = 66;
+            setInterval(() => {
+                width += Math.random() * 2;
+                if (width > 95) width = 66;
+                progressBar.style.width = width + '%';
+            }, 5000);
+        })();
+
+        // ====== 库存递减动画 ======
+        (function animateStock() {
+            const stockEl = document.querySelector('[style*="仅剩"] span[style*="font-weight:800"], [style*="Only"] span[style*="font-weight:800"]');
+            if (!stockEl) return;
+            let stock = 12;
+            setInterval(() => {
+                if (stock > 3) {
+                    stock--;
+                    stockEl.textContent = stock;
+                }
+            }, 30000);
+        })();
+
+        // ====== 按钮涟漪效果 ======
+        document.querySelectorAll('.primary-btn, .share-btn, .neu-btn, .ai-trans-toggle').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(255,255,255,0.3);left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;transform:scale(0);animation:ripple 0.6s ease-out;pointer-events:none;`;
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // ====== 拼团tier升级 ======
+        document.querySelectorAll('[style*="待解锁"], [style*="Locked"]').forEach(el => {
+            el.addEventListener('click', () => {
+                showToast('📤 分享给好友即可解锁更低价格！');
+            });
+        });
+
+        // ====== 信任徽章点击 ======
+        document.querySelectorAll('[style*="假一赔十"], [style*="10x refund"]').forEach(el => {
+            el.closest('[style*="text-align:center"]')?.addEventListener('click', () => {
+                showToast('🛡️ 正品保障：假一赔十，全球溯源');
+            });
+        });
     })();
 
     // ====== i18n 多语言系统 ======
@@ -3491,62 +3844,6 @@ document.addEventListener('keydown', function(e) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./demo-sw.js').catch(function() {});
 }
-</script>
-
-<style>
-.portfolio-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
-.portfolio-reveal.visible{opacity:1;transform:translateY(0)}
-.portfolio-reveal[data-delay="100"]{transition-delay:.1s}
-.portfolio-reveal[data-delay="200"]{transition-delay:.2s}
-.portfolio-reveal[data-delay="300"]{transition-delay:.3s}
-.ui-portfolio-notes{max-width:800px;margin:40px auto;padding:28px;background:var(--card,#e6e6e6);border-radius:16px;box-shadow:0 4px 12px rgba(37,99,235,0.08)}
-.ui-portfolio-notes h2{font-size:1.05rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.ui-portfolio-notes h2 .icon{width:32px;height:32px;border-radius:8px;background:rgba(37,99,235,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem}
-.dn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.dn-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,0,0,0.06);transition:all .25s}
-.dn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-2px)}
-.dn-card h3{font-size:.8rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.dn-card h3 .tag{font-size:.56rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
-.dn-card h3 .tag.theory{background:rgba(37,99,235,0.08);color:#2563eb}
-.dn-card h3 .tag.psychology{background:rgba(124,58,237,0.08);color:#7c3aed}
-.dn-card h3 .tag.metric{background:rgba(16,185,129,0.08);color:#059669}
-.dn-card p{font-size:.74rem;color:var(--muted,#6b7280);line-height:1.7}
-@media(max-width:768px){.dn-grid{grid-template-columns:1fr}}
-</style>
-
-<section class="ui-portfolio-notes portfolio-reveal" data-delay="200">
-  <h2><span class="icon">📋</span> 设计决策说明（PM视角）</h2>
-  <div class="dn-grid">
-    <div class="dn-card">
-      <h3><span class="tag theory">设计</span> 移动端 APP Shell 架构</h3>
-      <p>430px 固定宽度模拟真实手机屏幕。底部 Tab Bar 4 个入口（首页/分类/拼团/我的）符合移动端导航心智模型。<strong>毛玻璃顶栏</strong>保持层次感。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag psychology">心理学</span> 三语 i18n 降低认知门槛</h3>
-      <p>中/英/日三语实时切换，<code>localStorage</code> 持久化语言偏好。跨境电商的核心痛点是<strong>语言障碍</strong>——用母语购物转化率提升 2-3 倍。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag metric">转化</span> 拼团倒计时 + 社交证明</h3>
-      <p>"还差2人成团"+"倒计时"双重紧迫感。参考拼多多的<strong>社交裂变模型</strong>——拼团价 vs 单独购买价的对比制造"不拼就亏了"的心理。</p>
-    </div>
-    <div class="dn-card">
-      <h3><span class="tag theory">设计</span> 双币价格 + 实时汇率</h3>
-      <p>商品同时显示人民币和目标货币价格，消除汇率心算负担。<strong>Progressive Disclosure</strong>：默认显示主价格，点击展开详细汇率信息。</p>
-    </div>
-  </div>
-</section>
-
-<script>
-(function(){
-  var els=document.querySelectorAll('.portfolio-reveal');
-  if(!els.length)return;
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
-    });
-  },{threshold:0.1});
-  els.forEach(function(el){obs.observe(el)});
-})();
 </script>
 </body>
 </html>
