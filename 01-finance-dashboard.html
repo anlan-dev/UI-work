@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <title>MoneyFlow · 个人财务仪表盘 — UI 设计作品</title>
 <!--
   DESIGN.md: Finance Dashboard
@@ -137,6 +137,16 @@ body{background:#F5F5F7;padding:10px;font-family:'Inter','Noto Sans SC',system-u
   .charts-row{grid-template-columns:1fr}
   .dn-grid{grid-template-columns:1fr}
   .oc-value{font-size:1.6rem}
+}
+@media(max-width:430px){
+  .container{padding:0 12px}
+  .header{padding:16px 12px}
+  .header h1{font-size:1.2rem}
+  .oc{padding:16px}
+  .oc-value{font-size:1.4rem}
+  .chart-card{padding:16px}
+  .tx-card{padding:14px 12px}
+  .fab{width:48px;height:48px;bottom:20px;right:16px;font-size:1.3rem}
 }
 </style>
 </head>
