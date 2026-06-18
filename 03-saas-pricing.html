@@ -44,9 +44,8 @@
   --r1:12px;--r2:16px;--r3:24px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;color:var(--text);line-height:1.6}
-
-.container{max-width:1100px;margin:0 auto;padding:48px 24px}
+body{background:#F5F5F7;padding:10px;font-family:'Inter','Noto Sans SC',system-ui,sans-serif;color:var(--text);line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:48px 24px;background:var(--bg);border-radius:20px}
 
 /* === Hero === */
 .hero{text-align:center;margin-bottom:48px;opacity:0;transform:translateY(20px)}
@@ -64,12 +63,11 @@ body{background:var(--bg);font-family:'Inter','Noto Sans SC',system-ui,sans-seri
 /* === Toggle === */
 .toggle-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin:32px 0 40px;opacity:0;transform:translateY(16px)}
 .toggle-wrap.show{opacity:1;transform:translateY(0);transition:all .6s cubic-bezier(.4,0,.2,1)}
-.toggle-label{font-size:.88rem;font-weight:600;color:var(--text3);cursor:pointer;transition:color .3s;user-select:none}
-.toggle-label.active{color:var(--text)}
-.toggle-track{width:52px;height:28px;background:var(--border);border-radius:999px;position:relative;cursor:pointer;transition:background .3s}
-.toggle-track.on{background:linear-gradient(135deg,var(--primary),var(--accent))}
-.toggle-thumb{width:22px;height:22px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
-.toggle-track.on .toggle-thumb{transform:translateX(24px)}
+.toggle-label{font-size:.88rem;font-weight:600;color:var(--text3);cursor:pointer;transition:all .3s;user-select:none;padding:8px 24px;border-radius:var(--r1);position:relative;background:transparent}
+.toggle-label.active{color:var(--primary);background:var(--primary-soft);font-weight:700}
+.toggle-label.active::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:24px;height:3px;border-radius:999px;background:var(--primary)}
+.toggle-label:hover:not(.active){color:var(--text);background:var(--surface2)}
+.toggle-track{display:none}
 .save-badge{background:var(--success-soft);color:var(--success);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(16,185,129,0.15)}
 
 /* === Pricing Cards === */
@@ -208,7 +206,6 @@ body{background:var(--bg);font-family:'Inter','Noto Sans SC',system-ui,sans-seri
 
   <div class="toggle-wrap">
     <span class="toggle-label" id="monthlyLabel" onclick="setBilling(false)">月付</span>
-    <div class="toggle-track on" id="toggleTrack" onclick="toggleBilling()"><div class="toggle-thumb"></div></div>
     <span class="toggle-label active" id="yearlyLabel" onclick="setBilling(true)">年付</span>
     <span class="save-badge">省20%</span>
   </div>
@@ -377,7 +374,6 @@ els.forEach(function(el){obs.observe(el)});
 
 function setBilling(yearly){
   isYearly=yearly;
-  document.getElementById('toggleTrack').classList.toggle('on',isYearly);
   document.getElementById('yearlyLabel').classList.toggle('active',isYearly);
   document.getElementById('monthlyLabel').classList.toggle('active',!isYearly);
   document.querySelectorAll('.pc-amount').forEach(function(el){
