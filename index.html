@@ -88,6 +88,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
 .pc-link:hover{gap:12px}
 .pc-link svg{transition:transform .3s}
 .pc-link:hover svg{transform:translateX(4px)}
+.pc-links{display:flex;align-items:center;flex-wrap:wrap;margin-top:12px}
+.pc-links .pc-link{font-size:.8rem;padding:8px 14px;background:rgba(0,113,227,.06);border-radius:8px}
+.pc-links .pc-link:hover{background:rgba(0,113,227,.12)}
 
 /* ===== DESIGN PRINCIPLES ===== */
 .principles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -277,7 +280,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
         <div class="pc-info">
           <span class="pc-tag orange">E-COMMERCE</span>
           <h3 class="pc-title">GlobalFUN<br>跨境电商AI拼团</h3>
-          <p class="pc-subtitle">MCP服务总线+6-Agent协作架构：需求解析Agent+市场调研Agent+选品分析Agent+文案生成Agent+合规审核Agent+运营策略Agent→Orchestrator路由→结构化卡片推送。覆盖跨境电商全链路闭环。</p>
+          <p class="pc-subtitle">MCP服务总线+6-Agent协作架构，覆盖需求→调研→选品→文案→合规→运营全链路闭环。验证多Agent并行协作与流水线编排的交互可行性。</p>
           <div class="pc-features">
             <span class="pc-feat">MCP协议</span><span class="pc-feat">6-Agent协作</span><span class="pc-feat">结构化推送</span><span class="pc-feat">多语言</span>
           </div>
@@ -286,7 +289,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) s
             <div class="pc-metric"><div class="val">98.2%</div><div class="lbl">意图识别率</div></div>
             <div class="pc-metric"><div class="val">180ms</div><div class="lbl">MCP延迟</div></div>
           </div>
-          <a class="pc-link" href="05-cross-border-ai.html">查看完整作品 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <div class="pc-links">
+            <a class="pc-link" href="05-cross-border-ai.html">查看完整作品 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a class="pc-link" href="https://github.com/anlan-dev/cross-border-ai" target="_blank" style="margin-left:8px">📦 GitHub <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+          </div>
         </div>
       </div>
 
